@@ -27,12 +27,12 @@ namespace Mission09_dh.Pages
             basket = HttpContext.Session.GetJson<Basket>("basket") ?? new Basket();
         }
 
-        public IActionResult OnPost(int projectId, string returnUrl)
+        public IActionResult OnPost(int bookId, string returnUrl)
         {
-            Book p = repo.Books.FirstOrDefault(x => x.BookId == projectId);
+            Book b = repo.Books.FirstOrDefault(x => x.BookId == bookId);
 
             basket = HttpContext.Session.GetJson<Basket>("basket") ?? new Basket();
-            basket.AddItem(p, 1);
+            basket.AddItem(b, 1);
 
             HttpContext.Session.SetJson("basket", basket);
 
