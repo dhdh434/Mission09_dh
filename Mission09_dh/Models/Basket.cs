@@ -11,10 +11,12 @@ namespace Mission09_dh.Models
 
         public void AddItem(Book bo, int qty)
         {
+            //filter item
             BasketLineItem line = Items
                 .Where(p => p.Book.BookId == bo.BookId)
                 .FirstOrDefault();
 
+            //check to see if item exists. if so then add to it, if not then create it
             if (line == null)
             {
                 Items.Add(new BasketLineItem
@@ -29,6 +31,7 @@ namespace Mission09_dh.Models
             }
         }
 
+        //calculate the total in cart
         public double CalculateTotal()
         {
             double sum = Items.Sum(x => x.Quantity * x.Book.Price);
@@ -39,7 +42,7 @@ namespace Mission09_dh.Models
         }
     }
 
-
+    //items that go in the basket
     public class BasketLineItem
     {
         public int LineID { get; set; }

@@ -16,6 +16,7 @@ namespace Mission09_dh.Components
             repo = temp;
         }
 
+        //go into the book list
         public IViewComponentResult Invoke()
         {
             ViewBag.SelectedCategory = RouteData?.Values["category"];

@@ -7,6 +7,18 @@
 
 <table class="table table-bordered table-striped">
 
+    @*some bootstrap fancy stuff*@
+    <style>
+        tr:nth-child(odd) {
+            background-color: pink;
+        }
+
+        tr:nth-child(even) {
+            background-color: aquamarine;
+        }
+    </style>
+
+    @*head of the table*@
     <thead>
         <tr>
             <th>Book</th>
@@ -16,6 +28,7 @@
         </tr>
     </thead>
 
+    @*loop through each item in cart*@
     <tbody>
         @foreach (var i in Model.basket.Items)
         {
@@ -28,6 +41,7 @@
         }
     </tbody>
 
+    @*calculate the bottom of the table*@
     <tfoot>
         <tr>
             <td colspan="3">Total:</td>
@@ -37,6 +51,8 @@
 
 </table>
 
+@*go back to the previous page to keep shopping*@
+@*added some special button from bootstrap, a btn-warning button*@
 <div>
-    <a class="btn btn-primary" href="@Model.ReturnUrl">Continue Shopping</a>
+    <a class="btn btn-warning" href="@Model.ReturnUrl">Continue Shopping</a>
 </div>

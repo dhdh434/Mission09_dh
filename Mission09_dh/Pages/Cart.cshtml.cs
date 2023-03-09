@@ -11,6 +11,7 @@ namespace Mission09_dh.Pages
 {
     public class CartModel : PageModel
     {
+        //Add a repo
         private iMission9Repository repo { get; set; }
 
         public CartModel (iMission9Repository temp)
@@ -21,12 +22,14 @@ namespace Mission09_dh.Pages
         public Basket basket { get; set; }
         public string ReturnUrl { get; set; }
 
+        //get method
         public void OnGet(string returnUrl)
         {
             ReturnUrl = returnUrl ?? "/";
             basket = HttpContext.Session.GetJson<Basket>("basket") ?? new Basket();
         }
 
+        //post method
         public IActionResult OnPost(int bookId, string returnUrl)
         {
             Book b = repo.Books.FirstOrDefault(x => x.BookId == bookId);

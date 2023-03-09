@@ -15,17 +15,20 @@ namespace Mission09_dh.Controllers
 
         private iMission9Repository repo;
 
+        //constructor
         public HomeController (iMission9Repository temp)
         {
             repo = temp;
         }
 
+        //main view
         public IActionResult Index(string category, int pageNum = 1)
         {
             int pageSize = 10;
 
             var x = new ProjectsViewModel
             {
+                //filter books
                 Books = repo.Books
                 .Where(p => p.Category == category | category == null)
                 .Skip((pageNum - 1) * pageSize)

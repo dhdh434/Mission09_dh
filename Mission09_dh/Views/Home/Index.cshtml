@@ -6,11 +6,14 @@
 
 <h1>Here are the books Buddy!</h1>
 
+@*loop through the books*@
 @foreach (Book b in Model.Books)
 {
+    //User a partial
     <partial name="BookSummary" model="b" />
 }
 
+@*add some buttons at bottom of page to move through the pages*@
 <div page-blah="@Model.PageInfo" page-action="Index" page-classes-enabled="true"
      page-class="btn" page-class-normal="btn-outline-dark"
      page-class-selected="btn-primary" class="btn-group pull-right m-1">
