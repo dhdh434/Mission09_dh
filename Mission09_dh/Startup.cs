@@ -35,6 +35,12 @@ namespace Mission09_dh
             });
 
             services.AddScoped<iMission9Repository, EFMission9Repository>();
+
+            services.AddRazorPages();
+
+            services.AddDistributedMemoryCache();
+
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,6 +59,8 @@ namespace Mission09_dh
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            app.UseSession();
+
             app.UseRouting();
 
             app.UseAuthorization();
@@ -60,8 +68,23 @@ namespace Mission09_dh
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    "categoryPage",
+                    "{category}/Page{PageNum}",
+                    new { controller = "Home", action = "Index"});
+                
+                endpoints.MapControllerRoute(
+                    "paging",
+                    "Page{pageNum}",
+                    new { controller = "Home", action = "Index", pageNum = 1});
+
+                endpoints.MapControllerRoute(
+                    "category",
+                    "{category}",
+                    new { controller = "Home", action = "Index", pageNum = 1});
+
+                endpoints.MapDefaultControllerRoute();
+
+                endpoints.MapRazorPages();
             });
         }
     }
