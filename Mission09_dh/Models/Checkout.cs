@@ -41,5 +41,11 @@ namespace Mission09_dh.Models
         [Required(ErrorMessage = "Please enter an email")]
         public string email { get; set; }
 
+        public double ComputeTotalValue()
+        {
+            double num = Lines.Count();
+            return num;
+        }
+
     }
 }
