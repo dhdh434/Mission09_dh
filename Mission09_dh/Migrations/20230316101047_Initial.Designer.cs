@@ -9,8 +9,8 @@ using Mission09_dh.Models;
 namespace Mission09_dh.Migrations
 {
     [DbContext(typeof(BookstoreContext))]
-    [Migration("20230316074824_AddCheckoutTable")]
-    partial class AddCheckoutTable
+    [Migration("20230316101047_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,7 +27,7 @@ namespace Mission09_dh.Migrations
                     b.Property<int?>("BookId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("CheckoutDonationId")
+                    b.Property<int?>("CheckoutId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Quantity")
@@ -37,7 +37,7 @@ namespace Mission09_dh.Migrations
 
                     b.HasIndex("BookId");
 
-                    b.HasIndex("CheckoutDonationId");
+                    b.HasIndex("CheckoutId");
 
                     b.ToTable("BasketLineItem");
                 });
@@ -85,7 +85,7 @@ namespace Mission09_dh.Migrations
 
             modelBuilder.Entity("Mission09_dh.Models.Checkout", b =>
                 {
-                    b.Property<int>("DonationId")
+                    b.Property<int>("CheckoutId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -95,12 +95,6 @@ namespace Mission09_dh.Migrations
 
                     b.Property<string>("AddressLine2")
                         .HasColumnType("TEXT");
-
-                    b.Property<string>("AddressLine3")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("Anonymous")
-                        .HasColumnType("INTEGER");
 
                     b.Property<string>("City")
                         .IsRequired()
@@ -121,7 +115,15 @@ namespace Mission09_dh.Migrations
                     b.Property<string>("Zip")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("DonationId");
+                    b.Property<string>("email")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("phone")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("CheckoutId");
 
                     b.ToTable("Checkouts");
                 });
@@ -134,7 +136,7 @@ namespace Mission09_dh.Migrations
 
                     b.HasOne("Mission09_dh.Models.Checkout", null)
                         .WithMany("Lines")
-                        .HasForeignKey("CheckoutDonationId");
+                        .HasForeignKey("CheckoutId");
                 });
 #pragma warning restore 612, 618
         }

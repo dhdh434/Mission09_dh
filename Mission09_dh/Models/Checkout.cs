@@ -22,7 +22,6 @@ namespace Mission09_dh.Models
         [Required(ErrorMessage = "Please enter a address line")]
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }
-        public string AddressLine3 { get; set; }
 
         [Required(ErrorMessage = "Please enter a city name")]
         public string City { get; set; }
@@ -35,6 +34,11 @@ namespace Mission09_dh.Models
         [Required(ErrorMessage = "Please enter a country")]
         public string Country { get; set; }
 
-        public bool Anonymous { get; set; }
+        [Required(ErrorMessage = "Please enter a phone number")]
+        public string phone { get; set; }
+
+        [Required(ErrorMessage = "Please enter an email")]
+        public string email { get; set; }
+
     }
 }

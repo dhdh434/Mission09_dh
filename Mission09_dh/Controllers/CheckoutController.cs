@@ -19,21 +19,24 @@ namespace Mission09_dh.Controllers
             basket = b;
         }
 
+        //get method
         [HttpGet]
         public IActionResult Purchase()
         {
             return View(new Checkout());
         }
 
+        //postMethod
         [HttpPost]
         public IActionResult Purchase(Checkout checkout)
         {
-
+            //check if item in basket
             if (basket.Items.Count() == 0)
             {
                 ModelState.AddModelError("", "Sorry, your basket is empty!");
             }
 
+            //make sure the modelstate is valid
             if (ModelState.IsValid)
             {
                 checkout.Lines = basket.Items.ToArray();

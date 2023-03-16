@@ -2,29 +2,30 @@
 
 namespace Mission09_dh.Migrations
 {
-    public partial class AddCheckoutTable : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+
             migrationBuilder.CreateTable(
                 name: "Checkouts",
                 columns: table => new
                 {
-                    DonationId = table.Column<int>(nullable: false)
+                    CheckoutId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(nullable: false),
                     AddressLine1 = table.Column<string>(nullable: false),
                     AddressLine2 = table.Column<string>(nullable: true),
-                    AddressLine3 = table.Column<string>(nullable: true),
                     City = table.Column<string>(nullable: false),
                     State = table.Column<string>(nullable: false),
                     Zip = table.Column<string>(nullable: true),
                     Country = table.Column<string>(nullable: false),
-                    Anonymous = table.Column<bool>(nullable: false)
+                    phone = table.Column<string>(nullable: false),
+                    email = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Checkouts", x => x.DonationId);
+                    table.PrimaryKey("PK_Checkouts", x => x.CheckoutId);
                 });
 
             migrationBuilder.CreateTable(
@@ -35,7 +36,7 @@ namespace Mission09_dh.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     BookId = table.Column<int>(nullable: true),
                     Quantity = table.Column<int>(nullable: false),
-                    CheckoutDonationId = table.Column<int>(nullable: true)
+                    CheckoutId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -47,10 +48,10 @@ namespace Mission09_dh.Migrations
                         principalColumn: "BookId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_BasketLineItem_Checkouts_CheckoutDonationId",
-                        column: x => x.CheckoutDonationId,
+                        name: "FK_BasketLineItem_Checkouts_CheckoutId",
+                        column: x => x.CheckoutId,
                         principalTable: "Checkouts",
-                        principalColumn: "DonationId",
+                        principalColumn: "CheckoutId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -60,9 +61,9 @@ namespace Mission09_dh.Migrations
                 column: "BookId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BasketLineItem_CheckoutDonationId",
+                name: "IX_BasketLineItem_CheckoutId",
                 table: "BasketLineItem",
-                column: "CheckoutDonationId");
+                column: "CheckoutId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
