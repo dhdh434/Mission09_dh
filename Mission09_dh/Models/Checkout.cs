@@ -9,6 +9,7 @@ namespace Mission09_dh.Models
 {
     public class Checkout
     {
+        //create the database for checking out
         [Key]
         [BindNever]
         public int CheckoutId { get; set; }

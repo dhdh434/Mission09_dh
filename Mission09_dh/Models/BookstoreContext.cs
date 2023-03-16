@@ -19,6 +19,7 @@ namespace Mission09_dh.Models
         {
         }
 
+        //create the databases
         public DbSet<Book> Books { get; set; }
         public DbSet<Checkout> Checkouts { get; set; }
 
