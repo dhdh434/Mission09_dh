@@ -9,8 +9,22 @@ namespace Mission09_dh.Controllers
 {
     public class CheckoutController : Controller
     {
+        public CheckoutController()
+        {
+
+        }
+
+        [HttpGet]
         public IActionResult Purchase()
         {
+            return View(new Checkout());
+        }
+
+        [HttpPost]
+        public IActionResult Purchase(Checkout donation)
+        {
+
+
             return View(new Checkout());
         }
     }
