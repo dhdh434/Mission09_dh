@@ -38,6 +38,7 @@
                 <td>@(i.Book.Price.ToString("c"))</td>
                 <td>@((i.Quantity * i.Book.Price).ToString("c"))</td>
 
+                @*add a remove button with hidden values*@
                 <td class="text-center">
                     <form method="post" asp-page-handler="Remove">
                         <input type="hidden" name="bookId" value="@i.Book.BookId" />
@@ -64,4 +65,7 @@
 @*added some special button from bootstrap, a btn-warning button*@
 <div>
     <a class="btn btn-warning" href="@Model.ReturnUrl">Continue Shopping</a>
+
+    @*add a checkout button*@
+    <a class="btn btn-primary" asp-controller="Checkout" asp-action="Purchase">Checkout</a>
 </div>

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Mission09_dh.Models
 {
+    //inheret from basket class
     public class SessionBasket: Basket
     {
         public static Basket GetBasket (IServiceProvider services)
@@ -17,6 +18,7 @@ namespace Mission09_dh.Models
 
             SessionBasket basket = session?.GetJson<SessionBasket>("Basket") ?? new SessionBasket();
 
+            //set the session equal to the basket session
             basket.Session = session;
 
             return basket;
@@ -25,18 +27,21 @@ namespace Mission09_dh.Models
         [JsonIgnore]
         public ISession Session { get; set; }
 
+        //overide addItem function
         public override void AddItem(Book bo, int qty)
         {
             base.AddItem(bo, qty);
             Session.SetJson("Basket", this);
         }
 
+        //overide RemoveItem function
         public override void RemoveItem(Book boo)
         {
             base.RemoveItem(boo);
             Session.SetJson("Basket", this);
         }
 
+        //overide Clear Basket function
         public override void ClearBasket()
         {
             base.ClearBasket();

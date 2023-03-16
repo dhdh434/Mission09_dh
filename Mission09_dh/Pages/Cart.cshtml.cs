@@ -17,9 +17,10 @@ namespace Mission09_dh.Pages
         public Basket basket { get; set; }
         public string ReturnUrl { get; set; }
 
-        public CartModel (iMission9Repository temp)
+        public CartModel (iMission9Repository temp, Basket b)
         {
             repo = temp;
+            basket = b;
         }
 
         //get method
