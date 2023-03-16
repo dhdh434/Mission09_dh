@@ -9,7 +9,7 @@ namespace Mission09_dh.Models
     {
         public List<BasketLineItem> Items { get; set; } = new List<BasketLineItem>();
 
-        public void AddItem(Book bo, int qty)
+        public virtual void AddItem(Book bo, int qty)
         {
             //filter item
             BasketLineItem line = Items
@@ -29,6 +29,16 @@ namespace Mission09_dh.Models
             {
                 line.Quantity += qty;
             }
+        }
+
+        public virtual void RemoveItem (Book boo)
+        {
+            Items.RemoveAll(x => x.Book.BookId == boo.BookId);
+        }
+
+        public virtual void ClearBasket()
+        {
+            Items.Clear();
         }
 
         //calculate the total in cart
