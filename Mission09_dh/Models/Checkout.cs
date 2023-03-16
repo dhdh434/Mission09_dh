@@ -11,7 +11,7 @@ namespace Mission09_dh.Models
     {
         [Key]
         [BindNever]
-        public int DonationId { get; set; }
+        public int CheckoutId { get; set; }
 
         [BindNever]
         public ICollection<BasketLineItem> Lines { get; set; }

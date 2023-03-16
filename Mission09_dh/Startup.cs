@@ -37,6 +37,8 @@ namespace Mission09_dh
 
             services.AddScoped<iMission9Repository, EFMission9Repository>();
 
+            services.AddScoped<iCheckoutRepository, EFCheckoutRepository>();
+
             services.AddRazorPages();
 
             services.AddDistributedMemoryCache();

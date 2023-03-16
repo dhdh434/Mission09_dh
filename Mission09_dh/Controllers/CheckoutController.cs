@@ -7,11 +7,16 @@ using System.Threading.Tasks;
 
 namespace Mission09_dh.Controllers
 {
+    
+
     public class CheckoutController : Controller
     {
-        public CheckoutController()
+        private iCheckoutRepository repo { get; set; }
+        private Basket basket { get; set; }
+        public CheckoutController(iCheckoutRepository temp, Basket b)
         {
-
+            repo = temp;
+            basket = b;
         }
 
         [HttpGet]
@@ -21,11 +26,26 @@ namespace Mission09_dh.Controllers
         }
 
         [HttpPost]
-        public IActionResult Purchase(Checkout donation)
+        public IActionResult Purchase(Checkout checkout)
         {
 
+            if (basket.Items.Count() == 0)
+            {
+                ModelState.AddModelError("", "Sorry, your basket is empty!");
+            }
 
-            return View(new Checkout());
+            if (ModelState.IsValid)
+            {
+                checkout.Lines = basket.Items.ToArray();
+                repo.SaveCheckout(checkout);
+                basket.ClearBasket();
+
+                return RedirectToPage("/CheckoutCompleted");
+            }
+            else
+            {
+                return View();
+            }
         }
     }
 }
